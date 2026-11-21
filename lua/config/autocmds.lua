@@ -8,11 +8,19 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- Terminal olan windowa girince direkt terminal moduna gecme
-vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "TermOpen" }, {
-  group = vim.api.nvim_create_augroup("TerminalAutoInsert", { clear = true }),
-  callback = function()
-    if vim.bo.buftype == "terminal" then
-      vim.cmd("startinsert")
-    end
+--vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "TermOpen" }, {
+--  group = vim.api.nvim_create_augroup("TerminalAutoInsert", { clear = true }),
+--  callback = function()
+--    if vim.bo.buftype == "terminal" then
+--      vim.cmd("startinsert")
+--    end
+--  end,
+--})
+-- Markdown diagnostic kapat
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("DisableMarkdownDiagnostics", { clear = true }),
+  pattern = { "markdown", "markdown.mdx" },
+  callback = function(event)
+    vim.diagnostic.enable(false, { bufnr = event.buf })
   end,
 })
