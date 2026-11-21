@@ -44,3 +44,12 @@ end
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", {
   desc = "Terminal normal moduna geç",
 })
+
+--Space space ile gizli dosyalari da arama
+vim.keymap.set("n", "<leader><space>", function()
+  Snacks.picker.files({
+    cwd = LazyVim.root(),
+    hidden = true,
+    ignored = true,
+  })
+end, { desc = "Tüm dosyalarda ara" })
