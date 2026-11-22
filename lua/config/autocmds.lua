@@ -24,3 +24,4 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.diagnostic.enable(false, { bufnr = event.buf })
   end,
 })
+
